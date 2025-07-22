@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🔥 MADE BY ROLEX 🔥 - Ultra Modern File Share</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  /* (păstrează stilurile anterioare, plus unele pentru modale) */
+  * {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f004f, #9c27b0);
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    padding: 40px 20px 20px;
+    text-align: center;
+    animation: fadeInDown 1s ease forwards;
+  }
+  header h1 {
+    font-size: 3.8rem;
+    color: #ff00ff;
+    letter-spacing: 5px;
+    text-shadow: 0 0 20px #ff00ff;
+    animation: pulseGlow 3s infinite alternate;
+  }
+  header p {
+    font-size: 1.3rem;
+    margin-top: 10px;
+    color: #dcdcdccc;
+    font-weight: 600;
+  }
+  main {
+    flex-grow: 1;
+    padding: 0 20px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  form {
+    margin-top: 30px;
+    background: rgba(255 255 255 / 0.05);
+    border-radius: 20px;
+    padding: 25px 30px;
+    box-shadow: 0 0 25px #9c27b0cc;
+    animation: fadeInUp 1.2s ease forwards;
+  }
+  form input[type="file"] {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 15px;
+    background: rgba(255 255 255 / 0.1);
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+  }
+  form input[type="file"]:hover {
+    background: rgba(255 255 255 / 0.3);
+  }
+  form button {
+    margin-top: 18px;
+    width: 100%;
+    background: linear-gradient(45deg, #ff00ff, #9c27b0);
+    border: none;
+    padding: 16px 0;
+    border-radius: 35px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: white;
+    box-shadow: 0 0 40px #ff00ff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: pulseButton 3s infinite alternate;
+  }
+  form button:hover {
+    background: linear-gradient(45deg, #9c27b0, #ff00ff);
+    box-shadow: 0 0 60px #ff00ff;
+    transform: scale(1.1);
+  }
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 35px;
+    flex-wrap: wrap;
+  }
+  .btn-group button {
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: #fff;
+    box-shadow: 0 0 20px #9c27b0;
+    transition: all 0.4s ease;
+    min-width: 140px;
+  }
+  .btn-group button:hover {
+    color: #ff00ff;
+    box-shadow: 0 0 40px #ff00ff;
+    transform: scale(1.05);
+  }
+  footer {
+    padding: 25px 20px;
+    background: rgba(255 255 255 / 0.07);
+    text-align: center;
+    box-shadow: 0 0 40px #9c27b0cc inset;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    animation: fadeInUp 1.5s ease forwards;
+  }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 15px;
+  }
+  .social-links a {
+    display: inline-block;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff00ff, #9c27b0);
+    box-shadow: 0 0 25px #ff00ff;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .social-links a:hover {
+    transform: scale(1.3) rotate(15deg);
+    box-shadow: 0 0 45px #ff00ff, 0 0 20px #9c27b0;
+  }
+  .social-links img {
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(0 0 5px #fff);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  footer p {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #ddd;
+    letter-spacing: 1.2px;
+  }
+  /* Modal styles */
+  .modal-bg {
+    display: none;
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-bg.active {
+    display: flex;
+  }
+  .modal {
+    background: #220046;
+    border-radius: 15px;
+    padding: 25px 35px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 0 30px #9c27b0;
+    color: white;
+    text-align: center;
+    position: relative;
+    animation: fadeInUp 0.5s ease forwards;
+  }
+  .modal h2 {
+    margin-bottom: 15px;
+    color: #ff00ff;
+  }
+  .modal p {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 25px;
+  }
+  .modal button.close-btn {
+    background: #ff00ff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 40px #ff00ff;
+    transition: all 0.3s ease;
+  }
+  .modal button.close-btn:hover {
+    box-shadow: 0 0 70px #ff00ff;
+    transform: scale(1.1);
+  }
+
+  /* Download list */
+  .download-list {
+    margin-top: 25px;
+    background: rgba(255 255 255 / 0.07);
+    border-radius: 20px;
+    padding: 15px 20px;
+    box-shadow: 0 0 20px #9c27b0cc;
+    max-height: 250px;
+    overflow-y: auto;
+  }
+  .download-list ul {
+    list-style: none;
+  }
+  .download-list li {
+    margin: 10px 0;
+  }
+  .download-list a {
+    color: #ff00ff;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  .download-list a:hover {
+    color: #fff;
+    text-shadow: 0 0 15px #ff00ff;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 2.8rem;
+    }
+    form {
+      max-width: 100%;
+      padding: 20px;
+    }
+    .btn-group {
+      flex-direction: column;
+      gap: 15px;
+    }
+    .btn-group button {
+      width: 100%;
+    }
+  }
+
+  /* Animations */
+  @keyframes fadeInDown {0% {opacity: 0; transform: translateY(-40px);} 100% {opacity: 1; transform: translateY(0);}}
+  @keyframes fadeInUp {0% {opacity: 0; transform: translateY(40px);} 100% {opacity: 1; transform: translateY(0);}}
+  @keyframes pulseGlow {0%, 100% {text-shadow: 0 0 15px #ff00ff;} 50% {text-shadow: 0 0 35px #ff00ff;}}
+  @keyframes pulseButton {0%, 100% {box-shadow: 0 0 40px #ff00ff;} 50% {box-shadow: 0 0 60px #ff00ff;}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔥 MADE BY ROLEX 🔥</h1>
+  <p>Ultra Modern File Share</p>
+</header>
+
+<main>
+  <form id="uploadForm">
+    <input type="file" id="fileInput" accept=".mp4,.zip,.mp3,.rar,.avi,.mkv" multiple required />
+    <button type="submit">Upload File</button>
+  </form>
+
+  <div class="btn-group">
+    <button id="downloadBtn">Download Files</button>
+    <button id="infoBtn">Info</button>
+  </div>
+
+  <div class="download-list" id="downloadList" style="display:none;">
+    <h3>Available Downloads</h3>
+    <ul>
+      <li><a href="https://example.com/sample-video.mp4" target="_blank" rel="noopener noreferrer">Sample Video (MP4)</a></li>
+      <li><a href="https://example.com/archive.zip" target="_blank" rel="noopener noreferrer">Archive ZIP</a></li>
+      <li><a href="https://example.com/song.mp3" target="_blank" rel="noopener noreferrer">Audio MP3</a></li>
+      <li><a href="https://example.com/files.rar" target="_blank" rel="noopener noreferrer">Compressed RAR</a></li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="social-links" aria-label="Social media links">
+    <a href="https://www.tiktok.com/@unknownuserx190?_t=ZN-8yEG1M4He58&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046120.png" alt="TikTok icon" />
+    </a>
+    <a href="https://www.paypal.me/CatalinRolex" target="_blank" rel="noopener noreferrer" aria-label="PayPal">
+      <img src="https://cdn-icons-png.flaticon.com/512/888/888870.png" alt="PayPal icon" />
+    </a>
+  </div>
+  <p>Made with ❤️ by Rolex - Ultra Modern File Share</p>
+</footer>
+
+<!-- Modal Info -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h2 id="modalTitle">Info / Informații</h2>
+    <p>
+      <strong>Română:</strong><br />
+      Acest site a fost creat de <strong>Rolex</strong> pentru a vă permite să încărcați și să partajați videoclipuri și diverse fișiere precum MP4, ZIP, MP3, RAR și multe altele.<br/><br/>
+      Link-uri importante:<br/>
+      TikTok: <a href="https://www.tiktok.com/@unknownuserx190?_t=ZN-8yEG1M4He58&_r=1" target="_blank" rel="noopener noreferrer">unknownuserx190</a><br/>
+      PayPal: <a href="https://www.paypal.me/CatalinRolex" target="_blank" rel="noopener noreferrer">CatalinRolex</a><br/><br/>
+      Pentru donații, ne puteți contacta pe email: <a href="mailto:caja9486@gmail.com">caja9486@gmail.com</a>
+    </p>
+    <p>
+      <strong>English:</strong><br />
+      This site was created by <strong>Rolex</strong> to allow you to upload and share videos and various files such as MP4, ZIP, MP3, RAR, and many more.<br/><br/>
+      Important links:<br/>
+      TikTok: <a href="https://www.tiktok.com/@unknownuserx190?_t=ZN-8yEG1M4He58&_r=1" target="_blank" rel="noopener noreferrer">unknownuserx190</a><br/>
+      PayPal: <a href="https://www.paypal.me/CatalinRolex" target="_blank" rel="noopener noreferrer">CatalinRolex</a><br/><br/>
+      For donations, you can contact us via email: <a href="mailto:caja9486@gmail.com">caja9486@gmail.com</a>
+    </p>
+    <button class="close-btn" id="closeModal">Close</button>
+  </div>
+</div>
+
+<script>
+  // Toggle download list visibility
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    const dl = document.getElementById('downloadList');
+    dl.style.display = dl.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // Show modal on info button
+  const infoBtn = document.getElementById('infoBtn');
+  const modalBg = document.getElementById('modalBg');
+  const closeModalBtn = document.getElementById('closeModal');
+
+  infoBtn.addEventListener('click', () => {
+    modalBg.classList.add('active');
+  });
+
+  closeModalBtn.addEventListener('click', () => {
+    modalBg.classList.remove('active');
+  });
+
+  // Close modal on clicking outside modal content
+  modalBg.addEventListener('click', (e) => {
+    if (e.target === modalBg) {
+      modalBg.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
